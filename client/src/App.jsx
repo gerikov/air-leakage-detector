@@ -1,4 +1,5 @@
 import './App.css';
+import Calculator from './components/Calculator';
 import Device from './components/Device';
 import Hero from './components/Hero';
 import Intro from './components/Intro';
@@ -11,6 +12,7 @@ function App() {
       <Intro />
       <Technology />
       <Device />
+      <Calculator />
     </>
   );
 }

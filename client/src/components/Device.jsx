@@ -4,7 +4,7 @@ const Device = () => {
   return (
     <section>
       <div className='container mx-auto flex flex-col p-4'>
-        <div className='text-3xl md:text-4xl font-display text-primary font-bold uppercase tracking-wide  leading-normal my-8 flex items-center w-3/4'>
+        <div className='text-3xl md:text-4xl font-display text-primary font-bold uppercase tracking-wide  leading-normal my-8 flex items-center md:w-3/4'>
           a legmodernebb ultramagas frekvenciás mérőműszert használjuk a
           szivárgások felderítéshez
         </div>
