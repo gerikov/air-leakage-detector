@@ -15,18 +15,16 @@ const Calculator = () => {
   useEffect(() => {
     // TODO: calculate the saved value
     if (
-      parseInt(compressedAirIndex.nominalDelivery) > 0 &&
       parseInt(compressedAirIndex.nominalPower) > 0 &&
       parseInt(compressedAirIndex.price) > 0 &&
       parseInt(compressedAirIndex.leakage) > 0 &&
       parseInt(compressedAirIndex.workingHours) > 0
     ) {
       const calculatedKw =
-        (parseInt(compressedAirIndex.nominalDelivery) / 1000) *
-        (parseInt(compressedAirIndex.workingHours) * 60) *
+        parseInt(compressedAirIndex.workingHours) *
+        parseInt(compressedAirIndex.nominalPower) *
         (parseInt(compressedAirIndex.leakage) / 100) *
-        3.5 *
-        0.1;
+        0.66;
       console.log(calculatedKw);
       const calculatedPrice = calculatedKw * parseInt(compressedAirIndex.price);
       setSavedValue(calculatedPrice);
@@ -48,22 +46,25 @@ const Calculator = () => {
           <div className='basis-full text-primaryLight uppercase text-xl mb-2 md:px-4'>
             Szivárgás kalkulátor
           </div>
-          <p className='md:w-2/3 mb-4 text-gray-700 md:px-4'>
-            Ezt a számítást nem kötelező elvégezni, 8 bar értéknél átlagosan
-            0,12 szokott lenni, de ez az érték szükséges a következő számításhoz
-          </p>
+          <div className='md:w-2/3 mb-4 text-gray-700 md:px-4 flex flex-col gap-2'>
+            <p>Egy rendszer átlagos szivárgási mérteke ~20%</p>
+            <p>
+              Egy év 8 760 óra, ha a kompresszor folyamatosan működik, 5 napos
+              munkahét 1 műszakkal, pedig ~2 000 óra egy évben
+            </p>
+          </div>
           <FormField
             label='Névleges teljesítmény (kw)'
             name='nominalPower'
             value={compressedAirIndex.name}
             handleChange={handleChange}
           />
-          <FormField
+          {/* <FormField
             label='Névleges szállítási sebesség (l/min)'
             name='nominalDelivery'
             value={compressedAirIndex.name}
             handleChange={handleChange}
-          />
+          /> */}
           {/* <FormField
             label='Kihasználtság (%)'
             name='utilization'
@@ -83,7 +84,7 @@ const Calculator = () => {
             handleChange={handleChange}
           />
           <FormField
-            label='A kompresszor éves munkaóra (8 760, ha egész évben működik)'
+            label='A kompresszor éves munkaóra'
             name='workingHours'
             value={compressedAirIndex.name}
             handleChange={handleChange}
